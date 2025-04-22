@@ -1,3 +1,5 @@
+
+import json
 import streamlit as st
 from datetime import datetime
 import gspread
@@ -45,11 +47,16 @@ st.markdown("""
 try:
     st.image("logo.jpeg", width=150)
 except:
-    st.warning("⚠️ Logo não encontrada. Verifique se 'logo.jpegg' está na mesma pasta do código.")
+    st.warning("⚠️ Logo não encontrada. Verifique se 'logo.jpeg' está na mesma pasta do código.")
 
-# --- Autenticação com Google Sheets ---
-SCOPE = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-creds = Credentials.from_service_account_file("service_account.json", scopes=SCOPE)
+# --- Autenticação com Google Sheets (via Streamlit Secrets) ---
+SCOPE = [
+    "https://spreadsheets.google.com/feeds",
+    "https://www.googleapis.com/auth/drive"
+]
+# Carrega credenciais do secrets.toml
+service_account_info = json.loads(st.secrets["GOOGLE_SERVICE_ACCOUNT_JSON"])
+creds = Credentials.from_service_account_info(service_account_info, scopes=SCOPE)
 client = gspread.authorize(creds)
 planilha = client.open("Cartão de Ponto")
 usuarios_sheet = planilha.worksheet("usuarios")
@@ -59,7 +66,10 @@ escalas_sheet = planilha.worksheet("escalas")
 # --- Funções principais ---
 def verificar_login(usuario, senha):
     for row in usuarios_sheet.get_all_records():
-        if str(row.get("Nome", "")).strip().lower() == usuario.strip().lower() and str(row.get("Senha", "")).strip() == senha.strip():
+        if (
+            str(row.get("Nome", "")).strip().lower() == usuario.strip().lower()
+            and str(row.get("Senha", "")).strip() == senha.strip()
+        ):
             return True
     return False
 
@@ -98,7 +108,12 @@ def registrar_ponto(usuario):
                 st.success("Retorno almoço registrado!")
             elif not row["Saída"]:
                 registros_sheet.update_cell(i, 6, hora)
-                total, hrs = calcular_total(row["Entrada"], row["Saída Almoço"], row["Retorno Almoço"], hora)
+                total, hrs = calcular_total(
+                    row["Entrada"],
+                    row["Saída Almoço"],
+                    row["Retorno Almoço"],
+                    hora
+                )
                 registros_sheet.update_cell(i, 7, total)
                 extra = max(0, hrs - 8)
                 registros_sheet.update_cell(i, 9, f"{extra:.2f}")
