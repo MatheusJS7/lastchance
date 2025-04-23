@@ -92,8 +92,11 @@ def calcular_total(entrada, saida_almoco, retorno_almoco, saida):
         return "", 0
 
 def registrar_ponto(usuario):
-    hoje = datetime.now().strftime("%d/%m/%Y")
-    hora = datetime.now().strftime("%H:%M:%S")
+    fuso_sp = pytz.timezone('America/Sao_Paulo')
+    agora = datetime.now(fuso_sp)
+    hoje = agora.strftime("%d/%m/%Y")
+    hora = agora.strftime("%H:%M:%S")
+
     registros = registros_sheet.get_all_records()
     for i, row in enumerate(registros, start=2):
         if row["Nome"] == usuario and row["Data"] == hoje:
@@ -123,7 +126,7 @@ def registrar_ponto(usuario):
             return
     registros_sheet.append_row([usuario, hoje, hora, "", "", "", "", "", ""])
     st.success("Entrada registrada!")
-
+    
 def mostrar_historico(usuario):
     df = pd.DataFrame(registros_sheet.get_all_records())
     df = df[df["Nome"].str.lower() == usuario.strip().lower()]
