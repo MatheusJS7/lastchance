@@ -32,7 +32,7 @@ st.markdown("""
             border-radius: 4px !important;
         }
         .stTable td, .stTable th {
-            color: #5a3e1b;
+            color: #cd7f32;
         }
         .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
             color: #cd7f32;
