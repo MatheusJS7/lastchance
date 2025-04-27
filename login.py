@@ -28,7 +28,7 @@ st.markdown("""
         .stDateInput>div>input {
             color: #ffffff !important;
             font-weight: bold;
-            border: 2px solid #800020 !important;
+            border: 2px solid #ffffff !important;
             border-radius: 4px !important;
         }
         .stTable td, .stTable th {
