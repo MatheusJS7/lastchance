@@ -28,14 +28,14 @@ st.markdown("""
         .stDateInput>div>input {
             color: #ffffff !important;
             font-weight: bold;
-            border: 2px solid #ffffff !important;
+            border: 2px solid #800020 !important;
             border-radius: 4px !important;
         }
         .stTable td, .stTable th {
             color: #ffffff;
         }
         .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
-            color: #800020;
+            color: #ffffff;
         }
         .stImage {
             width: 100px;
