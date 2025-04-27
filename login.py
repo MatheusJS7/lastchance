@@ -35,7 +35,7 @@ st.markdown("""
             color: #cd7f32;
         }
         .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
-            color: #cd7f32;
+            color: #800020;
         }
         .stImage {
             width: 100px;
