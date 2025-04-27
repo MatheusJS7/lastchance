@@ -26,7 +26,7 @@ st.markdown("""
         }
         .stTextInput>div>div>input,
         .stDateInput>div>input {
-            color: #cd7f32 !important;
+            color: #ffffff !important;
             font-weight: bold;
             border: 2px solid #800020 !important;
             border-radius: 4px !important;
