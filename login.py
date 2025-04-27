@@ -14,15 +14,15 @@ st.set_page_config(page_title="Cartão de Ponto", page_icon="🕒", layout="wide
 # --- Estilos personalizados ---
 st.markdown("""
     <style>
-        .stApp { background-color: #f5f5dc; }
+        .stApp { background-color: #800000; }
         .stButton>button {
-            background-color: #800020;
+            background-color: #f5f5dc;
             color: white;
             border-radius: 8px;
             padding: 0.5em 1em;
         }
         .stButton>button:hover {
-            background-color: #a83246;
+            background-color: #f5f5dc;
         }
         .stTextInput>div>div>input,
         .stDateInput>div>input {
